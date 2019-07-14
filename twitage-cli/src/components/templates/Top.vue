@@ -3,7 +3,7 @@
   <div class="content">
     <div class="header">
       <span class="title">{{title}}</span>
-      <router-link to="/login">ログイン</router-link>
+      <router-link to="/signIn">ログイン</router-link>
     </div>
     <router-link to="/SignUp">Twitageをはじめる</router-link>
   </div>

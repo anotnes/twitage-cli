@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Top from '@/components/templates/Top'
 import Main from '@/components/templates/Main'
-import Login from '@/components/templates/Login'
+import SignIn from '@/components/templates/SignIn'
 import SignUp from '@/components/templates/SignUp'
 import MyPage from '@/components/organisms/MyPage'
 import Project from '@/components/organisms/Project'
@@ -52,9 +52,9 @@ export default new Router({
       ]
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/signIn',
+      name: 'signIn',
+      component: SignIn
     },
     {
       path: '/SignUp',
