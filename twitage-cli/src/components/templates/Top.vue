@@ -4,8 +4,8 @@
     <div class="header">
       <span class="title">{{title}}</span>
       <router-link to="/login">ログイン</router-link>
-  </div>
-    <button v-on:click="moveUserRegist()">Twitageをはじめる</button>
+    </div>
+    <router-link to="/SignUp">Twitageをはじめる</router-link>
   </div>
 </div>
 </template>
@@ -19,9 +19,6 @@ export default {
     }
   },
   methods: {
-      moveUserRegist: function() {
-          router.push("/userRegist");
-      }
   }
 }
 </script>
@@ -44,20 +41,6 @@ li {
 }
 a {
   color: #42b983;
-}
-
-img {
-  
-}
-
-button {
-    background-color: white;
-    border-color: #a02c58;
-    color: #a02c58;
-    font-size: 18px;
-    width: 200px;
-    height: 40px;
-    border-radius: 6px;
 }
 
 .header {

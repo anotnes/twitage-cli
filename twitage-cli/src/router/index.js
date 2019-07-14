@@ -1,18 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Top from '@/components/Top'
-import Main from '@/components/main/Main'
-import MyPage from '@/components/main/MyPage'
-//import Modal from '@/components/modal/Modal'
-import Project from '@/components/project/Project'
-import ProjectEdit from '@/components/project/ProjectEdit'
-import ProjectOverview from '@/components/project/ProjectOverview'
-import ProjectNew from '@/components/project/ProjectNew'
-import Login from '@/components/Login'
-import UserEdit from '@/components/user/UserEdit'
-import TaskEdit from '@/components/task/TaskEdit'
-// import User from '@/components/User'
-// import Project from '@/components/Project'
+import Top from '@/components/templates/Top'
+import Main from '@/components/templates/Main'
+import Login from '@/components/templates/Login'
+import SignUp from '@/components/templates/SignUp'
+import MyPage from '@/components/organisms/MyPage'
+import Project from '@/components/organisms/Project'
+import ProjectEdit from '@/components/molecules/ProjectEdit'
+import ProjectOverview from '@/components/molecules/ProjectOverview'
 
 Vue.use(Router)
 
@@ -29,7 +24,7 @@ export default new Router({
       component: Main,
       children: [
         {
-          path: 'myPage',
+          path: '',
           name: 'MyPage',
           component: MyPage
         },
@@ -38,6 +33,10 @@ export default new Router({
           name: 'Project',
           component: Project,
           children: [
+            {
+              path: '',
+              component: ProjectEdit
+            },
             {
               path: ':id',
               component: ProjectOverview,
@@ -58,15 +57,20 @@ export default new Router({
       component: Login
     },
     {
-      path: '/userEdit',
-      name: 'UserEdit',
-      component: UserEdit
-    },
-    {
-      path: '/taskEdit',
-      name: 'TaskEdit',
-      component: TaskEdit
+      path: '/SignUp',
+      name: 'signUp',
+      component: SignUp
     }
+    // {
+    //   path: '/userEdit',
+    //   name: 'UserEdit',
+    //   component: UserEdit
+    // },
+    // {
+    //   path: '/taskEdit',
+    //   name: 'TaskEdit',
+    //   component: TaskEdit
+    // }
     // {
     //   path: '/user',
     //   name: 'User',

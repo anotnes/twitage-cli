@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <ProjectHeader />
-    <router-view></router-view>
-  </div>
+    <div class="header">
+      <div v-if="projectName != ''" class="project-name">{{projectName}}</div>
+      <div v-if="projectName == ''" class="project-name">プロジェクトの新規作成</div>
+      <div v-if="extension != ''" class="project-extension">{{extension}}</div>
+    </div>
 </template>
 
 <script>
 import store from '@/store'
 import router from '@/router/index'
-import ProjectHeader from '@/components/project/ProjectHeader'
 
 export default {
   name: 'Project',
-  components: {
-    ProjectHeader
-  },
-  data () {
-    return {
-      userName: store.state.userInfo.name,
-      projectName: store.state.projectInfo.name,
-      extension: store.state.projectInfo.extension,
+  computed: {
+    projectName() {
+      return this.$store.getters.projectInfo.name;
+    },
+    extension() {
+      return this.$store.getters.projectInfo.extension;
     }
   },
   methods: {
       
-  },
+  }
 }
 
 </script>

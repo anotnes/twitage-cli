@@ -1,5 +1,4 @@
 <template>
-<div class="top">
   <div class="menu">
     <div class="user-name">
       <img :src="iconUrl">
@@ -10,14 +9,12 @@
     </div>
     <div class="project-list">
       <span class="list-title">プロジェクト一覧</span>
-      <span class="project-create-icon" v-on:click="dispNewProject()">[作成]</span>
-      <div class="project-item" v-on:click="dispProject(project.id)" v-bind:id="project.id" v-for="(project, index) in projectList" :key="index">
+      <span class="project-create-icon" v-on:click="dispProjectNew()">[作成]</span>
+      <div class="project-item" v-on:click="dispProjectOverView(project.id)" v-bind:id="project.id" v-for="(project, index) in projectList" :key="index">
         #<span class="project-name">{{project.name}}</span>
       </div>
     </div>
   </div>
-  <router-view></router-view>
-</div>
 </template>
 
 <script>
@@ -28,38 +25,28 @@ export default {
   name: 'Main',
   data () {
     return {
-      userName: store.state.userInfo.name,
-      iconUrl: store.state.userInfo.iconUrl,
-      projectList: store.state.userInfo.projectList,
-      taskList: store.state.projectInfo.taskList,
-      memberList: store.state.projectInfo.memberList
+      
+    }
+  },
+  computed: {
+    projectList() {
+      //return "aa"
+      return this.$store.getters.userInfo.projectList;
+    },
+    userName() {
+      //return "bbb"
+      return this.$store.getters.userInfo.name;
+    },
+    iconUrl() {
+      //return "cccc"
+      return this.$store.getters.userInfo.iconUrl;
     }
   },
   methods: {
       /**
-       * タスクの詳細画面に遷移
-       */
-      dispTaskDetail: function() {
-        // idをキーにAPIからタスク詳細情報を取得
-        const taskInfo = {
-            id: '1',
-            name: 'タスク詳細',
-            limitDate: '2019/06/01',
-            createStaffId: '1',
-            imposedStaffId: '2',
-            createStaff: '大城',
-            imposedStaff: '新井',
-            report: '',
-            state: ''
-        }
-        store.setTaskInfo(taskInfo);
-        router.push("/taskDetail");
-      },
-
-      /**
        * プロジェクトの初期画面を表示
        */
-      dispProject: function(id) {
+      dispProjectOverView(id) {
         // プロジェクト選択時、選択されたプロジェクトリストの背景色を変更する
         const projectItems = document.getElementsByClassName('project-item');
         for (let item of projectItems) {
@@ -125,7 +112,8 @@ export default {
           }
         }
         if (resultData.result) {
-          store.setProjectInfo(resultData.project_info);
+          //store.setProjectInfo(resultData.project_info);
+          this.$store.commit('setProjectInfo', resultData.project_info);
           router.push("/main/project/" + id);
         } else {
           // エラーメッセージ表示
@@ -135,27 +123,30 @@ export default {
       /**
        * プロジェクトの新規作成画面を表示する
        */
-      dispNewProject: function() {
+      dispProjectNew() {
         // プロジェクト選択時、選択されたプロジェクトリストの背景色を変更する
         const projectItems = document.getElementsByClassName('project-item');
         for (let item of projectItems) {
           item.style.backgroundColor = "";
           item.style.color = "";
         }
-        const projectInfo = {
+
+        // プロジェクトの情報を初期化する
+        const project_info = {
           name: '',
           extension: '',
-          taskList: [],
-          memberList: []
+          task_List: [],
+          member_List: []
         }
-        store.setProjectInfo(projectInfo);
+        //store.setProjectInfo(projectInfo);
+        this.$store.commit('setProjectInfo', project_info);
         router.push("/main/project");
       },
 
       /**
        * ログアウトを実行し、topに遷移
        */
-      logout: function() {
+      logout() {
         // storeデータを初期化
         router.push("/");
       }
@@ -183,20 +174,13 @@ export default {
     height: auto;
     margin-right:10px;
   }
-
-  .top {
-    display:flex;
-    overflow: hidden;
-    width:100%;
-    height:800px;
-  }
   
   .menu {
     margin: 0px;
     background-color:#381713;
     overflow: auto;
     color: #fff;
-    width: 20%;
+    width: 100%;
     color: #bdbdbd;
   }
 

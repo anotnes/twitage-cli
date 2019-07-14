@@ -1,23 +1,19 @@
 <template>
-    <div class="header">
-      <div v-if="projectName != ''" class="project-name">{{projectName}}</div>
-      <div v-if="projectName == ''" class="project-name">プロジェクトの新規作成</div>
-      <div v-if="extension != null" class="project-extension">{{extension}}</div>
-    </div>
+  <div>
+    <ProjectHeader />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 import store from '@/store'
 import router from '@/router/index'
+import ProjectHeader from '@/components/molecules/ProjectHeader'
 
 export default {
   name: 'Project',
-  data () {
-    return {
-      userName: store.state.userInfo.name,
-      projectName: store.state.projectInfo.name,
-      extension: store.state.projectInfo.extension,
-    }
+  components: {
+    ProjectHeader
   },
   methods: {
       
@@ -39,8 +35,6 @@ export default {
   .header {
     width: 100%;
     height: 60px;
-    background-color:#FCF8EA;
-    color: #381713;
     padding: 0px;
     margin: 0px;
   }

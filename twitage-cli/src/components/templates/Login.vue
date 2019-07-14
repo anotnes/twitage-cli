@@ -1,9 +1,7 @@
 <template>
 <div class="top">
-  <div class="header">
-  </div>
   <div class="content">
-    <h1>{{title}}</h1>
+    <h1>ログイン</h1>
     <span>{{msg}}</span><br>
     <label>TwitterID:</label><input type="text" id="id"><br/>
     <label>Password:</label><input type="password" id="pass"><br/>
@@ -19,12 +17,11 @@ export default {
   name: 'Top',
   data () {
     return {
-      title: 'Login',
       msg: ''
     }
   },
   methods: {
-      login: function() {
+      login() {
         // ログイン結果をAXIOSにて取得
         // todo
         //const resultData = {};
@@ -52,8 +49,8 @@ export default {
             }
         };
         if (resultData.result) {
-            store.setUserInfo(resultData.user_info);
-            router.push("/main/myPage");
+            this.$store.commit('setUserInfo', resultData.user_info);
+            router.push("/main");
         } else {
             this.msg = resultData.errMsg;
         }
