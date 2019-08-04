@@ -8,29 +8,31 @@ import MyPage from '@/components/organisms/MyPage'
 import Project from '@/components/organisms/Project'
 import ProjectEdit from '@/components/molecules/ProjectEdit'
 import ProjectOverview from '@/components/molecules/ProjectOverview'
+import firebase from 'firebase'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '',
-      name: 'Top',
+      name: 'top',
       component: Top
     },
     {
       path: '/main',
-      name: 'Main',
+      name: 'main',
       component: Main,
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',
-          name: 'MyPage',
+          name: 'myPage',
           component: MyPage
         },
         {
           path: 'project',
-          name: 'Project',
+          name: 'project',
           component: Project,
           children: [
             {
@@ -57,29 +59,25 @@ export default new Router({
       component: SignIn
     },
     {
-      path: '/SignUp',
+      path: '/signUp',
       name: 'signUp',
       component: SignUp
     }
-    // {
-    //   path: '/userEdit',
-    //   name: 'UserEdit',
-    //   component: UserEdit
-    // },
-    // {
-    //   path: '/taskEdit',
-    //   name: 'TaskEdit',
-    //   component: TaskEdit
-    // }
-    // {
-    //   path: '/user',
-    //   name: 'User',
-    //   component: User
-    // },
-    // {
-    //   path: '/project',
-    //   name: 'Project',
-    //   component: Project
-    // }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  // ログインして射ないユーザーはSignInページに飛ばす
+  if (requiresAuth && !currentUser) {
+    next('signIn')
+  } else if (!requiresAuth && currentUser) {
+    next()
+  } else {
+    next()
+  }
+})
+
+export default router

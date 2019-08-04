@@ -1,12 +1,10 @@
 <template>
 <div class="top">
-  <div class="content">
-    <div class="header">
-      <span class="title">{{title}}</span>
-      <router-link to="/signIn">ログイン</router-link>
-    </div>
-    <router-link to="/SignUp">Twitageをはじめる</router-link>
+  <div class="header">
+    <span class="title">{{title}}</span>
+    <router-link to="/signIn">ログイン</router-link>
   </div>
+  <router-link to="/signUp">Twitageをはじめる</router-link>
 </div>
 </template>
 

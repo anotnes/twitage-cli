@@ -1,0 +1,21 @@
+/* アニメーション中のスタイル */
+.basic-leave-active,
+.basic-enter-active {
+    transition: opacity 1.5s;
+}
+ 
+/* 表示アニメーション */
+.basic-enter {
+    opacity: 0;
+}
+.basic-enter-to {
+    opacity: 1;
+}
+ 
+/* 非表示アニメーション */
+.basic-leave {
+    opacity: 1;
+}
+.basic-leave-to {
+    opacity: 0;
+}

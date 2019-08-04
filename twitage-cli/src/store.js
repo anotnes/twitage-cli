@@ -34,7 +34,9 @@ const store = new Vuex.Store({
             adminId: '',
             taskList: [],
             memberList: []
-        }
+        },
+        // モーダルウィンドウ
+        modals: []
     },
     mutations: {
         setUserInfo (state, user) {
@@ -64,6 +66,12 @@ const store = new Vuex.Store({
             state.projectInfo.adminId = project.adminId;
             state.projectInfo.taskList = project.task_list;
             state.projectInfo.memberList = project.member_list;
+        },
+        openModal(state, modal) {
+            state.modals.push(modal);
+        },
+        closeModal(state) {
+            state.modals.pop();
         }
     },
     getters: {
@@ -75,7 +83,19 @@ const store = new Vuex.Store({
         },
         projectInfo(state) {
             return state.projectInfo;
+        },
+        modals(state) {
+            return state.modals;
         }
+    },
+    actions: {
+        openModal({commit}, params) {
+            commit('openModal', params);
+        },
+        
+        closeModal({commit}) {
+            commit('closeModal');
+        },
     }
 });
 

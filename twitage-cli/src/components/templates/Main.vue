@@ -1,12 +1,14 @@
 <template>
-<div class="main">
-  <div class="menu">
-    <Menu></Menu>
-  </div>
-  <div class="content">
-    <router-view></router-view>
-  </div>
-</div>
+  <transition name="basic" appear>
+    <div class="main">
+      <div class="area-menu">
+        <Menu></Menu>
+      </div>
+      <div class="area-content">
+        <router-view></router-view>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -21,25 +23,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* SP対応 */
-@media screen and (max-width: 500px){
-}
-
-/* PC対応 */
-@media screen and (min-width: 501px){
-  .main {
-    display:flex;
-  }
-  .menu {
-    width:20%;
-    height:600px;
-  }
-  .content {
-    width:80%;
-  }
-}
-
-</style>

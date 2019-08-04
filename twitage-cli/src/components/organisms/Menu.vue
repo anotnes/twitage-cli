@@ -1,6 +1,7 @@
 <template>
+<transition name="basic" appear>
   <div class="menu">
-    <div class="user-name">
+    <div class="user-name" v-on:click="dispMyPage()">
       <img :src="iconUrl">
       {{userName}}
     </div>
@@ -15,6 +16,7 @@
       </div>
     </div>
   </div>
+</transition>
 </template>
 
 <script>
@@ -43,9 +45,6 @@ export default {
     }
   },
   methods: {
-      /**
-       * プロジェクトの初期画面を表示
-       */
       dispProjectOverView(id) {
         // プロジェクト選択時、選択されたプロジェクトリストの背景色を変更する
         const projectItems = document.getElementsByClassName('project-item');
@@ -119,11 +118,7 @@ export default {
           // エラーメッセージ表示
         }
       },
-
-      /**
-       * プロジェクトの新規作成画面を表示する
-       */
-      dispProjectNew() {
+      dispProjectNew () {
         // プロジェクト選択時、選択されたプロジェクトリストの背景色を変更する
         const projectItems = document.getElementsByClassName('project-item');
         for (let item of projectItems) {
@@ -142,96 +137,11 @@ export default {
         this.$store.commit('setProjectInfo', project_info);
         router.push("/main/project");
       },
-
-      /**
-       * ログアウトを実行し、topに遷移
-       */
-      logout() {
-        // storeデータを初期化
-        router.push("/");
+      dispMyPage () {
+        router.push("/main");
       }
   },
 }
 
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* SP対応 */
-@media screen and (max-width: 500px){
-  .content .task-list {
-    width:80%;
-  }
-}
-
-/* PC対応 */
-@media screen and (min-width: 501px){
-  img {
-    max-width: 80%;
-    max-height: 80%;
-    width: auto;
-    height: auto;
-    margin-right:10px;
-  }
-  
-  .menu {
-    margin: 0px;
-    background-color:#381713;
-    overflow: auto;
-    color: #fff;
-    width: 100%;
-    color: #bdbdbd;
-  }
-
-  .user-name {
-    width: 100%;
-    height: 40px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-  }
-
-  .user-name:hover {
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .search-task {
-    width: 80%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-  }
-
-  .input-box {
-    width:100%;
-  }
-
-  .list-title:hover{
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .project-list {
-    text-align: left;
-    width:100%;
-  }
-
-  .project-item:hover {
-    background-color:#7c443e;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .project-create-icon:hover {
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .project-name {
-    margin-left:10px;
-  }
-}
-
-</style>

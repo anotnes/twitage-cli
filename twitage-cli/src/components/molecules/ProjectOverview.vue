@@ -1,15 +1,16 @@
 <template>
-  <div class="content">
+<transition name="basic" appear>
+  <div class="project-overview">
     <div class="task-list">
       <div class="list-title">
         やる人が決まっていないタスク
       </div>
       <div class="task-item create-task">
-        <img src="../../assets/taskcard.png">
+        <img src="../../assets/images/taskcard.png">
         <div class="plus"></div>
       </div>
       <div class="task-item" v-bind:id="'task-' + task.id" v-for="(task, index) in taskList" :key="index">
-        <img src="../../assets/taskcard.png">
+        <img src="../../assets/images/taskcard.png">
         <span>{{task.title}}</span>
       </div>
     </div>
@@ -29,6 +30,7 @@
       </div>
       </div>
   </div>
+</transition>
 </template>
 
 
@@ -95,119 +97,3 @@ export default {
 }
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-}
-
-.content {
-  display:flex;
-  overflow: hidden;
-  padding: 0px;
-  margin: 0px;
-  background-color:#FCF8EA;
-}
-
-/* SP対応 */
-@media screen and (max-width: 500px){
-  .content .task-list {
-    width:80%;
-  }
-}
-
-/* PC対応 */
-@media screen and (min-width: 501px){
-
-  .task-list {
-    width:50%;
-    height: 100%;
-    overflow:auto;
-  }
-
-  .member-list {
-    width:50%;
-    height: 100%;
-    overflow:auto;
-  }
-
-  .list-title {
-    height: 40px;
-    margin:auto;
-    align-items: center;
-  }
-
-  .task-item {
-    width: 50%;
-    height: auto;
-    background-size: cover;
-    position: relative;
-    margin: auto;
-    padding: 30px;
-    text-align: center;
-  }
-
-  .create-task{
-    opacity: 0.6;
-  }
-
-  .task-item span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    margin:0;
-    padding:0;
-  }
-
-  .member-item {
-    display: flex;
-    width: 80%;
-    height: 200px;
-    background-color: white;	
-    text-align: center;	
-    margin: 20px auto;
-    margin-bottom: -1px;
-  }
-
-  .member-icon {
-    width: 30%;
-    font-size: 12px;
-    background-color: #381713;
-    color: #FCF8EA;
-    border: 1px solid #381713;
-    border-radius: 10px 0 0 10px;
-    text-align: center;	
-    align-items: center;
-  }
-
-  .member-icon img{
-    width: 40%;
-    margin: 0 auto;
-  }
-
-  .member-task {
-    width: 100%;
-    height: auto;
-    border: 1px solid #381713;
-    border-left: 0px;
-    background-size: cover;
-    position: relative;
-  }
-
-  .member-task .task-title {
-
-  }
-
-  .member-task .task-limit {
-
-  }
-
-}
-</style>
